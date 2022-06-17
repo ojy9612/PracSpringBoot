@@ -1,5 +1,6 @@
 package com.homework.hanghae99homework02.security;
 
+import com.homework.hanghae99homework02.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,18 +12,23 @@ import java.util.stream.Collectors;
 public class UserDetailsImpl implements UserDetails {
 
     private final String email;
+
+    private final String nickName;
+
     private final List<String> roles;
     private String password;
-
-    public UserDetailsImpl(String email, List<String> roles) {
-        this.email = email;
-        this.roles = roles;
+    public UserDetailsImpl(User user) {
+        this.email = user.getEmail();
+        this.roles = user.getRoles();
+        this.nickName = user.getNickname();
     }
 
-    public UserDetailsImpl(String email, List<String> roles, String password) {
-        this.email = email;
-        this.roles = roles;
-        this.password = password;
+    /**
+     * password 안쓰여서 생성자 안 만듬
+     */
+
+    public String getNickName() {
+        return nickName;
     }
 
     @Override

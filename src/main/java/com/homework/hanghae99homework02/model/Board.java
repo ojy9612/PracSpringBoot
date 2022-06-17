@@ -3,8 +3,6 @@ package com.homework.hanghae99homework02.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.homework.hanghae99homework02.dto.AwsS3;
-import com.homework.hanghae99homework02.dto.BoardDto;
 import lombok.Getter;
 import lombok.Setter;
 
