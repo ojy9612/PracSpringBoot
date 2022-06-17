@@ -4,6 +4,7 @@ import com.homework.hanghae99homework02.exception.eset.WhoAreYouException;
 import com.homework.hanghae99homework02.exception.eset.WrongIdException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,6 +31,13 @@ public class ApiException extends RuntimeException{
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleUsernameNotFoundException(UsernameNotFoundException e){
+        Map<String, String> errors = new HashMap<>();
+        errors.put("UsernameNotFoundException",e.getMessage());
+
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(value = { WrongIdException.class })
     protected ResponseEntity<ErrorResponse> handleWrongIdException(WrongIdException e) {
@@ -40,4 +48,6 @@ public class ApiException extends RuntimeException{
     protected ResponseEntity<ErrorResponse> handleWhoAreYouException(WhoAreYouException e) {
         return ErrorResponse.toResponseEntity(e.getErrorCode());
     }
+
+
 }
