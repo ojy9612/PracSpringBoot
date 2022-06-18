@@ -38,7 +38,7 @@ class UserControllerTest {
     JwtTokenProvider jwtTokenProvider;
 
     @Nested
-    @DisplayName("회원가입")
+    @DisplayName("유저 기능 Test")
     class RegisterTest {
 
         @Nested

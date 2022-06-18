@@ -40,7 +40,7 @@ class BoardControllerTest {
 
 
     @Nested
-    @DisplayName("게시글 CRUD Test")
+    @DisplayName("게시글 기능 Test")
     class RegisterTest {
 
         @BeforeEach
