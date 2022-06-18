@@ -52,7 +52,6 @@ public class BoardService {
                 () -> new IllegalArgumentException("해당 유저를 찾을 수 없습니다.")
         );
 
-
         Board board;
 
         AwsS3 awsS3;
@@ -93,7 +92,6 @@ public class BoardService {
                     .key(board.getImageKey())
                     .path(board.getImageLink())
                     .build());
-
 
             boardRepository.delete(board);
             return board_id;

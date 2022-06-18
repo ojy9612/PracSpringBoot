@@ -27,7 +27,7 @@ public class LikesService {
         this.likesRepository = likesRepository;
     }
 
-    public String GoLikes(Long boardId, UserDetailsImpl userDetailsImpl){
+    public void GoLikes(Long boardId, UserDetailsImpl userDetailsImpl){
         User user = userRepository.findByEmail(userDetailsImpl.getUsername()).orElseThrow(
                 () -> new IllegalArgumentException("해당 유저를 찾을 수 없습니다.")
         );
@@ -39,13 +39,9 @@ public class LikesService {
 
         if (optionalLikes.isPresent()){
             likesRepository.delete(optionalLikes.get());
-
-            return "좋아요취소";
         }else{
             Likes likes = new Likes(user, board);
             likesRepository.save(likes);
-
-            return "좋아요";
         }
 
     }

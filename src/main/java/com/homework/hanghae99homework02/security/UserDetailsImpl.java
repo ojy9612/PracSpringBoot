@@ -16,7 +16,9 @@ public class UserDetailsImpl implements UserDetails {
     private final String nickName;
 
     private final List<String> roles;
+
     private String password;
+
     public UserDetailsImpl(User user) {
         this.email = user.getEmail();
         this.roles = user.getRoles();

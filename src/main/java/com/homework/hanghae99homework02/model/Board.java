@@ -3,6 +3,7 @@ package com.homework.hanghae99homework02.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -48,6 +49,7 @@ public class Board extends Timestamped {
         this.likesList.add(likes);
     }
 
+    @Builder
     public Board(String imageLink, String imageKey, String content,int layout, User user) {
         this.imageLink = imageLink;
         this.imageKey = imageKey;
