@@ -177,7 +177,7 @@ class BoardControllerTest {
             @Test
             @Transactional
             @DisplayName("게시글 전체 목록 조회")
-            void 게시글전체목록조회(){
+            void GetAllBoard(){
                 //given
                 List<BoardResponseDto> allBoard1 = boardController.getAllBoard();
 
@@ -201,7 +201,7 @@ class BoardControllerTest {
             @Test
             @Transactional
             @DisplayName("아이디X, 게시글 생성")
-            void 아이디X게시글생성() {
+            void NoIdCreateBoard() {
                 //given
                 User user = User.builder()
                         .email("")
