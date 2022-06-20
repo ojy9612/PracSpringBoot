@@ -40,7 +40,7 @@ jobs:
           DATABASE_NAME: 'qqqqq'
           DATABASE_USERNAME: ${{ secrets.MYSQL_USER }}
           DATABASE_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-          DATABASE_SCRIPT: ''
+          DATABASE_SCRIPT: 'script.sql'
 
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
