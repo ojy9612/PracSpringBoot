@@ -37,7 +37,7 @@ public class BoardService {
     }
 
     public List<BoardResponseDto> getAllBoard(){
-        List<Board> boardList = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
+        List<Board> boardList = boardRepository.findAllEntityGraph(Sort.by(Sort.Direction.DESC, "createdAt"));
 
         List<BoardResponseDto> boardResponseDtoList = new ArrayList<>();
         for (Board board: boardList){
