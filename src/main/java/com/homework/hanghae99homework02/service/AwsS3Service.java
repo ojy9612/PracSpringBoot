@@ -5,6 +5,7 @@ import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.homework.hanghae99homework02.dto.AwsS3;
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -30,9 +31,17 @@ public class AwsS3Service {
     private String bucket;
 
     public AwsS3 upload(MultipartFile multipartFile, String dirName) throws IOException {
+
         if (multipartFile.getContentType() != null){
             File file = convertMultipartFileToFile(multipartFile)
-                    .orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File convert fail"));
+                    .orElseThrow(() -> new IllegalArgumentException("AwsS3 : 올바른 파일이 아닙니다."));
+
+            Tika tika = new Tika();
+            String detectedFile = tika.detect(file);
+
+            if(!(detectedFile.startsWith("image"))){
+                throw new IllegalArgumentException("AwsS3 : 올바른 이미지 파일을 올려주세요.");
+            }
 
             return upload(file, dirName);
         }

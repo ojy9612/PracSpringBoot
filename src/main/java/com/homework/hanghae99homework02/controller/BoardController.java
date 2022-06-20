@@ -60,10 +60,12 @@ public class BoardController {
     @PutMapping("/api/board/{board_id}")
     public BoardResponseDto updateBoard(@RequestParam("image") MultipartFile multipartFile,
                                         @PathVariable Long board_id,
-                                        @RequestBody BoardDto boardDto,
+                                        @RequestParam("layout") int layout,
+                                        @RequestParam("content") String content,
                                         @AuthenticationPrincipal UserDetailsImpl userDetails){
 
         ControllerFunc.userchecker(userDetails);
+        BoardDto boardDto = new BoardDto(layout,content);
         return boardService.updateBoard(multipartFile,board_id,boardDto,userDetails);
     }
 

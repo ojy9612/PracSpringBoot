@@ -27,7 +27,7 @@ public class RegisterDto {
     private String nickname;
 
     @Builder
-    public RegisterDto(String email, String password, String nickname) {
+    public RegisterDto(@NotNull String email,@NotNull String password,@NotNull String nickname) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;

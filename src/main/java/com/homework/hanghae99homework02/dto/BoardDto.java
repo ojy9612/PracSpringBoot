@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor
@@ -17,7 +18,7 @@ public class BoardDto {
     private String content;
 
     @Builder
-    public BoardDto(int layout, String content) {
+    public BoardDto(@NotNull int layout,@NotNull String content) {
         this.layout = layout;
         this.content = content;
     }

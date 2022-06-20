@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 public class Board extends Timestamped {
@@ -35,6 +35,7 @@ public class Board extends Timestamped {
     private int layout = 1;
 
 
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id",nullable = false)
     private User user;
@@ -50,7 +51,8 @@ public class Board extends Timestamped {
     }
 
     @Builder
-    public Board(String imageLink, String imageKey, String content,int layout, User user) {
+    public Board(@NotNull String imageLink,@NotNull String imageKey,
+                 @NotNull String content, int layout, @NotNull User user) {
         this.imageLink = imageLink;
         this.imageKey = imageKey;
         this.content = content;
@@ -58,7 +60,8 @@ public class Board extends Timestamped {
         user.addBoard(this);
     }
 
-    public void update(String imageLink, String imageKey, String content, int layout){
+    public void update(@NotNull String imageLink,@NotNull String imageKey,
+                       @NotNull String content, int layout){
         this.imageLink = imageLink;
         this.imageKey = imageKey;
         this.content = content;

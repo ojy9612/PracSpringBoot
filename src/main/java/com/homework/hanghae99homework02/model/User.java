@@ -8,11 +8,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Setter
 @Getter
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
@@ -54,7 +54,8 @@ public class User extends Timestamped{
     }
 
     @Builder
-    public User(String password, List<String> roles, String email, String nickname) {
+    public User(@NotNull String password,@NotNull List<String> roles,
+                @NotNull String email,@NotNull String nickname) {
         this.password = password;
         this.roles = roles;
         this.email = email;
