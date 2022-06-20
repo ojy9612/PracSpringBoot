@@ -29,7 +29,7 @@ class RegisterDtoTest {
 
         @Test
         @DisplayName("성공 테스트")
-        void 회원가입성공(){
+        void GoodRegister(){
             //given
             RegisterDto registerDto = RegisterDto.builder()
                     .email("email@test.com")
@@ -44,7 +44,7 @@ class RegisterDtoTest {
 
         @Test
         @DisplayName("이메일 오류1")
-        void 이메일오류1(){
+        void ErrorInEmail1(){
             //given
             RegisterDto registerDto = RegisterDto.builder()
                     .email("email@@test.com")
@@ -62,7 +62,7 @@ class RegisterDtoTest {
 
         @Test
         @DisplayName("이메일 오류2")
-        void 이메일오류2(){
+        void ErrorInEmail2(){
             //given
             RegisterDto registerDto = RegisterDto.builder()
                     .email("email.test")
@@ -80,7 +80,7 @@ class RegisterDtoTest {
 
         @Test
         @DisplayName("이메일 오류3")
-        void 이메일오류3(){
+        void ErrorInEmail3(){
             //given
             RegisterDto registerDto = RegisterDto.builder()
                     .email("")
@@ -98,7 +98,7 @@ class RegisterDtoTest {
 
         @Test
         @DisplayName("비밀번호 오류1")
-        void 비밀번호오류1(){
+        void ErrorInPassword1(){
             //given
             RegisterDto registerDto = RegisterDto.builder()
                     .email("email@test.com")
@@ -116,7 +116,7 @@ class RegisterDtoTest {
 
         @Test
         @DisplayName("비밀번호 오류2")
-        void 비밀번호오류2(){
+        void ErrorInPassword2(){
             //given
             RegisterDto registerDto = RegisterDto.builder()
                     .email("email@test.com")
@@ -134,7 +134,7 @@ class RegisterDtoTest {
 
         @Test
         @DisplayName("비밀번호 오류3")
-        void 비밀번호오류3(){
+        void ErrorInPassword3(){
             //given
             RegisterDto registerDto = RegisterDto.builder()
                     .email("email@test.com")
@@ -152,7 +152,7 @@ class RegisterDtoTest {
 
         @Test
         @DisplayName("닉네임 오류1")
-        void 닉네임오류1(){
+        void ErrorInNickname1(){
             //given
             RegisterDto registerDto = RegisterDto.builder()
                     .email("email@test.com")
@@ -170,7 +170,7 @@ class RegisterDtoTest {
 
         @Test
         @DisplayName("닉네임 오류2")
-        void 닉네임오류2(){
+        void ErrorInNickname2(){
             //given
             RegisterDto registerDto = RegisterDto.builder()
                     .email("email@test.com")
