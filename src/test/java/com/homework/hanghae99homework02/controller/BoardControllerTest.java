@@ -123,6 +123,8 @@ class BoardControllerTest {
                 assertThat(boardResponseDto2.getImageLink() != null).isEqualTo(true);
                 assertThat(boardResponseDto2.getContent()).isEqualTo("내용");
                 assertThat(boardResponseDto2.getLayout()).isEqualTo(1);
+
+                boardController.removeBoard(boardResponseDto2.getBoard_id(), baseUserDetails);
             }
 
             @Test
