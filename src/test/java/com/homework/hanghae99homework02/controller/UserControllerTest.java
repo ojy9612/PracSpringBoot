@@ -48,7 +48,7 @@ class UserControllerTest {
             @Test
             @Transactional
             @DisplayName("유저 생성")
-            void 회원가입() {
+            void RegisterUser() {
                 RegisterDto registerDto = RegisterDto.builder()
                         .email("email@test.com")
                         .nickname("nickname")
@@ -77,7 +77,7 @@ class UserControllerTest {
             @Test
             @Transactional
             @DisplayName("중복Email")
-            void 중복된Email(){
+            void SameEmail(){
                 //given
                 RegisterDto registerDto1 = RegisterDto.builder()
                         .email("email@test.com")
@@ -117,7 +117,7 @@ class UserControllerTest {
             @Test
             @Transactional
             @DisplayName("로그인 확인")
-            void 로그인(){
+            void LoginUser(){
                 //given
                 userController.registerUser(RegisterDto.builder()
                         .email("email@test.com")
@@ -149,7 +149,7 @@ class UserControllerTest {
             @Test
             @Transactional
             @DisplayName("아이디 오류")
-            void 없는아이디(){
+            void NoId(){
                 //given
                 userController.registerUser(RegisterDto.builder()
                         .email("email@test.com")
@@ -173,7 +173,7 @@ class UserControllerTest {
             @Test
             @Transactional
             @DisplayName("비밀번호 오류")
-            void 틀린비밀번호(){
+            void WrongPassword(){
                 //given
                 userController.registerUser(RegisterDto.builder()
                         .email("email@test.com")
