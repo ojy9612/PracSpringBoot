@@ -36,6 +36,6 @@ public class RegisterDto {
     @AssertTrue(message = "이메일이나 닉네임이 비밀번호에 포함되면 안됩니다.")
     public boolean isCheckPassword() {
         return !this.password.contains(this.email.split("@")[0])
-                && !this.password.contains(this.nickname.split("@")[0]);
+                && !this.password.contains(this.nickname);
     }
 }
