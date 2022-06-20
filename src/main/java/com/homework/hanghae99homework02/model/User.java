@@ -62,7 +62,5 @@ public class User extends Timestamped{
         this.nickname = nickname;
     }
 
-    public User(){
-
-    }
+    public User(){}
 }

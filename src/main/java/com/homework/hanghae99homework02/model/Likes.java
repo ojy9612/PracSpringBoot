@@ -28,8 +28,6 @@ public class Likes extends Timestamped {
         board.addLikes(this);
     }
 
-    public Likes() {
-
-    }
+    public Likes() { }
 
 }
