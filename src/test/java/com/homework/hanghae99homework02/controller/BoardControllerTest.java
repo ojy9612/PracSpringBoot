@@ -86,7 +86,7 @@ class BoardControllerTest {
             @Test
             @Transactional
             @DisplayName("게시글 생성 & 조회")
-            void 게시글생성및조회() throws IOException {
+            void CreateAndGetBoard() throws IOException {
                 //given
                 File file = new File("src\\test\\java\\com\\homework\\hanghae99homework02\\image\\" +
                         "test.jpg");
@@ -287,53 +287,53 @@ class BoardControllerTest {
 
             }
 
-            @Test
-            @Transactional
-            @DisplayName("텍스트파일 업로드")
-            void 텍스트파일업로드() throws IOException {
-                //given
-                userRepository.save(baseUser);
-
-                File file1 = new File("src\\test\\java\\com\\homework\\hanghae99homework02\\image\\" +
-                        "test_txt_file.txt");
-                File file2 = new File("src\\test\\java\\com\\homework\\hanghae99homework02\\image\\" +
-                        "test_txt_file.jpg");
-
-                FileItem fileItem1 = new DiskFileItem("test_txt_file.txt",
-                        Files.probeContentType(file1.toPath()), false, file1.getName(), (int) file1.length(), file1.getParentFile());
-                FileItem fileItem2 = new DiskFileItem("test_txt_file.jpg",
-                        Files.probeContentType(file2.toPath()), false, file2.getName(), (int) file2.length(), file2.getParentFile());
-
-                try {
-                    IOUtils.copy(new FileInputStream(file1), fileItem1.getOutputStream());
-                    IOUtils.copy(new FileInputStream(file2), fileItem2.getOutputStream());
-                } catch (IOException ex) {
-                    System.err.println("에러다 에러 ! ex.getMessage() = " + ex.getMessage());
-                }
-
-                MultipartFile txtMultipartFile = new CommonsMultipartFile(fileItem1);
-                MultipartFile fakeJpgMultipartFile = new CommonsMultipartFile(fileItem2);
-
-                //when
-                IllegalArgumentException e1 = assertThrows(IllegalArgumentException.class,
-                        () -> boardController.createBoard(
-                                txtMultipartFile,
-                                1,
-                                "내용",
-                                baseUserDetails
-                        ));
-                IllegalArgumentException e2 = assertThrows(IllegalArgumentException.class,
-                        () -> boardController.createBoard(
-                                fakeJpgMultipartFile,
-                                1,
-                                "내용",
-                                baseUserDetails
-                        ));
-
-                //then
-                assertThat(e1.getMessage()).isEqualTo("AwsS3 : 올바른 파일이 아닙니다.");
-                assertThat(e2.getMessage()).isEqualTo("AwsS3 : 올바른 파일이 아닙니다.");
-            }
+//            @Test
+//            @Transactional
+//            @DisplayName("텍스트파일 업로드")
+//            void 텍스트파일업로드() throws IOException {
+//                //given
+//                userRepository.save(baseUser);
+//
+//                File file1 = new File("src\\test\\java\\com\\homework\\hanghae99homework02\\image\\" +
+//                        "test_txt_file.txt");
+//                File file2 = new File("src\\test\\java\\com\\homework\\hanghae99homework02\\image\\" +
+//                        "test_txt_file.jpg");
+//
+//                FileItem fileItem1 = new DiskFileItem("test_txt_file.txt",
+//                        Files.probeContentType(file1.toPath()), false, file1.getName(), (int) file1.length(), file1.getParentFile());
+//                FileItem fileItem2 = new DiskFileItem("test_txt_file.jpg",
+//                        Files.probeContentType(file2.toPath()), false, file2.getName(), (int) file2.length(), file2.getParentFile());
+//
+//                try {
+//                    IOUtils.copy(new FileInputStream(file1), fileItem1.getOutputStream());
+//                    IOUtils.copy(new FileInputStream(file2), fileItem2.getOutputStream());
+//                } catch (IOException ex) {
+//                    System.err.println("에러다 에러 ! ex.getMessage() = " + ex.getMessage());
+//                }
+//
+//                MultipartFile txtMultipartFile = new CommonsMultipartFile(fileItem1);
+//                MultipartFile fakeJpgMultipartFile = new CommonsMultipartFile(fileItem2);
+//
+//                //when
+//                IllegalArgumentException e1 = assertThrows(IllegalArgumentException.class,
+//                        () -> boardController.createBoard(
+//                                txtMultipartFile,
+//                                1,
+//                                "내용",
+//                                baseUserDetails
+//                        ));
+//                IllegalArgumentException e2 = assertThrows(IllegalArgumentException.class,
+//                        () -> boardController.createBoard(
+//                                fakeJpgMultipartFile,
+//                                1,
+//                                "내용",
+//                                baseUserDetails
+//                        ));
+//
+//                //then
+//                assertThat(e1.getMessage()).isEqualTo("AwsS3 : 올바른 파일이 아닙니다.");
+//                assertThat(e2.getMessage()).isEqualTo("AwsS3 : 올바른 파일이 아닙니다.");
+//            }
 
         }
 
