@@ -130,7 +130,7 @@ class BoardControllerTest {
             @Test
             @Transactional
             @DisplayName("게시글 수정")
-            void 게시글수정(){
+            void UpdateBoard(){
                 //given
 
                 //when
