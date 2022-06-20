@@ -33,9 +33,10 @@ jobs:
           
       - name: Setup MySQL
         uses: samin/mysql-action@v1.3
+
         with:
           character set server: 'utf8' 
-          mysql database: ${{ secrets.MYSQL_SERVER }}
+          mysql database: 'test'
           host port: 3306
           mysql user: ${{ secrets.MYSQL_USER }}
           mysql password: ${{ secrets.MYSQL_PASSWORD }}
