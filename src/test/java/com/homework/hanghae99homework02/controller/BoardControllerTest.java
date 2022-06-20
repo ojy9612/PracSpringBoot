@@ -158,7 +158,7 @@ class BoardControllerTest {
             @Test
             @Transactional
             @DisplayName("게시글 삭제")
-            void 게시글삭제(){
+            void DeleteBoard(){
                 //when
                 userRepository.save(baseUser);
                 BoardResponseDto createBRD = boardController.createBoard(
