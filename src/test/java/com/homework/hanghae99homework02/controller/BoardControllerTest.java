@@ -6,6 +6,9 @@ import com.homework.hanghae99homework02.exception.eset.WrongIdException;
 import com.homework.hanghae99homework02.model.User;
 import com.homework.hanghae99homework02.repository.UserRepository;
 import com.homework.hanghae99homework02.security.UserDetailsImpl;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItem;
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -13,12 +16,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.transaction.Transactional;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,13 +41,12 @@ class BoardControllerTest {
     private UserDetailsImpl baseUserDetails;
     private MultipartFile nullMultipartFile;
 
-
     @Nested
     @DisplayName("게시글 기능 Test")
     class RegisterTest {
 
         @BeforeEach
-        void setUp(){
+        void setUp() throws IOException {
             baseUser = User.builder()
                     .email("email@test.com")
                     .nickname("nickname")
@@ -84,19 +86,43 @@ class BoardControllerTest {
             @Test
             @Transactional
             @DisplayName("게시글 생성 & 조회")
-            void 게시글생성및조회(){
+            void 게시글생성및조회() throws IOException {
+                //given
+                File file = new File("src\\test\\java\\com\\homework\\hanghae99homework02\\image\\" +
+                        "test.jpg");
+                FileItem fileItem = new DiskFileItem("test.jpg",
+                        Files.probeContentType(file.toPath()), false, file.getName(), (int) file.length(), file.getParentFile());
+
+                try {
+                     IOUtils.copy(new FileInputStream(file), fileItem.getOutputStream());
+                } catch (IOException ex) {
+                    System.err.println("에러다 에러 ! ex.getMessage() = " + ex.getMessage());
+                }
+
+                MultipartFile multipartFile = new CommonsMultipartFile(fileItem);
+
                 //when
                 userRepository.save(baseUser);
-                BoardResponseDto boardResponseDto = boardController.createBoard(
+                BoardResponseDto boardResponseDto1 = boardController.createBoard(
                         nullMultipartFile,
+                        1,
+                        "내용",
+                        baseUserDetails
+                );
+                BoardResponseDto boardResponseDto2 = boardController.createBoard(
+                        multipartFile,
                         1,
                         "내용",
                         baseUserDetails
                 );
 
                 //then
-                assertThat(boardResponseDto.getContent()).isEqualTo("내용");
-                assertThat(boardResponseDto.getLayout()).isEqualTo(1);
+                assertThat(boardResponseDto1.getContent()).isEqualTo("내용");
+                assertThat(boardResponseDto1.getLayout()).isEqualTo(1);
+
+                assertThat(boardResponseDto2.getImageLink() != null).isEqualTo(true);
+                assertThat(boardResponseDto2.getContent()).isEqualTo("내용");
+                assertThat(boardResponseDto2.getLayout()).isEqualTo(1);
             }
 
             @Test
@@ -104,10 +130,6 @@ class BoardControllerTest {
             @DisplayName("게시글 수정")
             void 게시글수정(){
                 //given
-                BoardDto boardDto = BoardDto.builder()
-                        .layout(2)
-                        .content("수정된 내용")
-                        .build();
 
                 //when
                 userRepository.save(baseUser);
@@ -121,7 +143,8 @@ class BoardControllerTest {
                 BoardResponseDto boardResponseDto = boardController.updateBoard(
                         nullMultipartFile,
                         createBRD.getBoard_id(),
-                        boardDto,
+                        2,
+                        "수정된 내용",
                         baseUserDetails
                 );
 
@@ -209,11 +232,6 @@ class BoardControllerTest {
 
                 UserDetailsImpl userDetails2 = new UserDetailsImpl(user2);
 
-                BoardDto boardDto = BoardDto.builder()
-                        .layout(2)
-                        .content("수정된 내용")
-                        .build();
-
                 //when
                 userRepository.save(baseUser);
                 userRepository.save(user2);
@@ -226,7 +244,8 @@ class BoardControllerTest {
                         () -> boardController.updateBoard(
                                 nullMultipartFile,
                                 createBRD.getBoard_id(),
-                                boardDto,
+                                2,
+                                "수정된 내용",
                                 userDetails2));
 
                 //then
@@ -264,6 +283,54 @@ class BoardControllerTest {
                 //then
                 assertThat(e.getErrorCode()).isEqualTo(JUST_HANDLE_SELF);
 
+            }
+
+            @Test
+            @Transactional
+            @DisplayName("텍스트파일 업로드")
+            void 텍스트파일업로드() throws IOException {
+                //given
+                userRepository.save(baseUser);
+
+                File file1 = new File("src\\test\\java\\com\\homework\\hanghae99homework02\\image\\" +
+                        "test_txt_file.txt");
+                File file2 = new File("src\\test\\java\\com\\homework\\hanghae99homework02\\image\\" +
+                        "test_txt_file.jpg");
+
+                FileItem fileItem1 = new DiskFileItem("test_txt_file.txt",
+                        Files.probeContentType(file1.toPath()), false, file1.getName(), (int) file1.length(), file1.getParentFile());
+                FileItem fileItem2 = new DiskFileItem("test_txt_file.jpg",
+                        Files.probeContentType(file2.toPath()), false, file2.getName(), (int) file2.length(), file2.getParentFile());
+
+                try {
+                    IOUtils.copy(new FileInputStream(file1), fileItem1.getOutputStream());
+                    IOUtils.copy(new FileInputStream(file2), fileItem2.getOutputStream());
+                } catch (IOException ex) {
+                    System.err.println("에러다 에러 ! ex.getMessage() = " + ex.getMessage());
+                }
+
+                MultipartFile txtMultipartFile = new CommonsMultipartFile(fileItem1);
+                MultipartFile fakeJpgMultipartFile = new CommonsMultipartFile(fileItem2);
+
+                //when
+                IllegalArgumentException e1 = assertThrows(IllegalArgumentException.class,
+                        () -> boardController.createBoard(
+                                txtMultipartFile,
+                                1,
+                                "내용",
+                                baseUserDetails
+                        ));
+                IllegalArgumentException e2 = assertThrows(IllegalArgumentException.class,
+                        () -> boardController.createBoard(
+                                fakeJpgMultipartFile,
+                                1,
+                                "내용",
+                                baseUserDetails
+                        ));
+
+                //then
+                assertThat(e1.getMessage()).isEqualTo("AwsS3 : 올바른 파일이 아닙니다.");
+                assertThat(e2.getMessage()).isEqualTo("AwsS3 : 올바른 파일이 아닙니다.");
             }
 
         }

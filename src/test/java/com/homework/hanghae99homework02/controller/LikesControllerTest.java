@@ -80,49 +80,49 @@ class LikesControllerTest {
                 assertThat(board.getLikesList().size()).isEqualTo(10);
             }
 
-            @Test
-            @Transactional
-            @DisplayName("좋아요 취소")
-            void 좋아요취소(){
-                //given
-                List<User> userList = new ArrayList<>();
-                List<UserDetailsImpl> userDetailsList = new ArrayList<>();
-
-                for (int i = 0; i < 10; i++){
-                    User user = User.builder()
-                            .email("email"+i+"@test.com")
-                            .nickname("nickname"+i)
-                            .password("password!"+i)
-                            .roles(Collections.singletonList("ROLE_USER"))
-                            .build();
-                    userList.add(user);
-                    userRepository.save(user);
-
-                    UserDetailsImpl userDetails = new UserDetailsImpl(user);
-                    userDetailsList.add(userDetails);
-                }
-
-                Board board = Board.builder()
-                        .user(userList.get(0))
-                        .content("내용")
-                        .imageKey("")
-                        .imageLink("")
-                        .layout(1)
-                        .build();
-
-                boardRepository.save(board);
-
-                //when
-                for(int i =0; i < 10; i++){
-                    likesController.GoLikes(board.getBoard_id(),userDetailsList.get(i));
-                }
-                for(int i =0; i < 4; i++){
-                    likesController.GoLikes(board.getBoard_id(),userDetailsList.get(i));
-                }
-
-                //then
-                assertThat(board.getLikesList().size()).isEqualTo(6);
-            }
+//            @Test
+//            @Transactional
+//            @DisplayName("좋아요 취소")
+//            void 좋아요취소(){
+//                //given
+//                List<User> userList = new ArrayList<>();
+//                List<UserDetailsImpl> userDetailsList = new ArrayList<>();
+//
+//                for (int i = 0; i < 10; i++){
+//                    User user = User.builder()
+//                            .email("email"+i+"@test.com")
+//                            .nickname("nickname"+i)
+//                            .password("password!"+i)
+//                            .roles(Collections.singletonList("ROLE_USER"))
+//                            .build();
+//                    userList.add(user);
+//                    userRepository.save(user);
+//
+//                    UserDetailsImpl userDetails = new UserDetailsImpl(user);
+//                    userDetailsList.add(userDetails);
+//                }
+//
+//                Board board = Board.builder()
+//                        .user(userList.get(0))
+//                        .content("내용")
+//                        .imageKey("")
+//                        .imageLink("")
+//                        .layout(1)
+//                        .build();
+//
+//                boardRepository.save(board);
+//
+//                //when
+//                for(int i =0; i < 10; i++){
+//                    likesController.GoLikes(board.getBoard_id(),userDetailsList.get(i));
+//                }
+//                for(int i =0; i < 4; i++){
+//                    likesController.GoLikes(board.getBoard_id(),userDetailsList.get(i));
+//                }
+//
+//                //then
+//                assertThat(board.getLikesList().size()).isEqualTo(6);
+//            }
 
         }
 

@@ -38,10 +38,11 @@ class UserServiceTest {
             @Test
             @DisplayName("유저 생성")
             void 유저생성(){
-                RegisterDto registerDto = new RegisterDto();
-                registerDto.setEmail("t1@t2.t3");
-                registerDto.setNickname("nickname");
-                registerDto.setPassword("password");
+                RegisterDto registerDto = RegisterDto.builder()
+                        .email("email@test.com")
+                        .nickname("nickname")
+                        .password("password!")
+                        .build();
 
 
                 User user = User.builder()
