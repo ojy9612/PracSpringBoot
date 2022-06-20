@@ -32,7 +32,9 @@ public class AwsS3Service {
 
     public AwsS3 upload(MultipartFile multipartFile, String dirName) throws IOException {
 
-        if (multipartFile.getContentType() != null){
+
+/*  S3 서버 삭제됨
+            if (multipartFile.getContentType() != null){
             File file = convertMultipartFileToFile(multipartFile)
                     .orElseThrow(() -> new IllegalArgumentException("AwsS3 : 올바른 파일이 아닙니다."));
 
@@ -44,7 +46,7 @@ public class AwsS3Service {
             }
 
             return upload(file, dirName);
-        }
+        }*/
         return new AwsS3("","");
     }
 
@@ -91,11 +93,12 @@ public class AwsS3Service {
     }
 
     public void remove(AwsS3 awsS3) {
+/*      S3 서버 삭제됨
         if (!(awsS3.getKey().equals(""))){
             if (!amazonS3.doesObjectExist(bucket, awsS3.getKey())) {
                 throw new AmazonS3Exception("Object " +awsS3.getKey()+ " does not exist!");
             }
             amazonS3.deleteObject(bucket, awsS3.getKey());
-        }
+        }*/
     }
 }
