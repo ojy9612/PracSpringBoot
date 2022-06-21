@@ -38,7 +38,7 @@ jobs:
         run: |
           ls
           # spring의 resources 경로로 이동
-          cd ./src
+          cd ./src/main/resources
 
           # application-dev.properties 파일 생성
           touch ./application-dev.properties 
