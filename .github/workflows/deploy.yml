@@ -40,7 +40,7 @@ jobs:
           DATABASE_NAME: 'homework02'
           DATABASE_USERNAME: ${{ secrets.MYSQL_USER }}
           DATABASE_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-          DATABASE_SCRIPT: 'script.sql'
+          DATABASE_SCRIPT: './script.sql'
         
 #         uses: mirromutth/mysql-action@v1.1
 #         with:
