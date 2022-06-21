@@ -1,4 +1,4 @@
-package com.homework.hanghae99homework02.s3;
+package com.homework.hanghae99homework02.config;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
