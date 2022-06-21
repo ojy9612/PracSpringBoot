@@ -223,7 +223,7 @@ class BoardControllerTest {
             @Test
             @Transactional
             @DisplayName("다른사람 게시글 수정")
-            void 다른사람게시글수정() {
+            void AnotherIdUpdateBoard() {
                 //given
                 User user2 = User.builder()
                         .email("email2@test.com")
