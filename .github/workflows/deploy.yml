@@ -32,11 +32,10 @@ jobs:
           java-version: 11
           
           
-    ## create application-dev.properties
-      - name: make application-dev.properties
+    ## create application.properties
+      - name: make application.properties
         if: true # branch가 develop일 때
         run: |
-          ls
           # spring의 resources 경로로 이동
           cd ./src/main/resources
 
