@@ -23,16 +23,16 @@ jobs:
       with:
         java-version: ‘11’
         distribution: ‘temurin’
-	## create application.properties
-    - name: make application.properties
-	if: true # branch가 develop일 때run: |
-	# spring의 resources 경로로 이동
-	cd ./src/main/resources
 
-	touch ./application.properties
-	# GitHub-Actions에서 설정한 값을 application-dev.properties 파일에 쓰기
-	echo "${{ secrets.PROPERTIES_DEV }}" > ./application.properties
-	shell: bash
+## create application.properties
+    - name: make application.properties
+      if: true # branch가 develop일 때run: |
+        # spring의 resources 경로로 이동
+cd ./src/main/resources
+touch ./application.properties
+# GitHub-Actions에서 설정한 값을 application-dev.properties 파일에 쓰기
+echo "${{ secrets.PROPERTIES_DEV }}" > ./application.properties
+      shell: bash
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     #build
