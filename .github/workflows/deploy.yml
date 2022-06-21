@@ -36,6 +36,7 @@ jobs:
       - name: make application-dev.properties
         if: true # branch가 develop일 때
         run: |
+          ls
           # spring의 resources 경로로 이동
           cd ./src/main/resources 
 
