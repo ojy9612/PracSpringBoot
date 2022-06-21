@@ -83,50 +83,50 @@ class BoardControllerTest {
         @Nested
         @DisplayName("성공 테스트")
         class SuccessTest {
-
-            @Test
-            @Transactional
-            @DisplayName("게시글 생성 & 조회")
-            void CreateAndGetBoard() throws IOException {
-                //given
-                File file = new File("src\\test\\java\\com\\homework\\hanghae99homework02\\image\\" +
-                        "test.jpg");
-                FileItem fileItem = new DiskFileItem("test.jpg",
-                        Files.probeContentType(file.toPath()), false, file.getName(), (int) file.length(), file.getParentFile());
-
-                try {
-                     IOUtils.copy(new FileInputStream(file), fileItem.getOutputStream());
-                } catch (IOException ex) {
-                    System.err.println("에러다 에러 ! ex.getMessage() = " + ex.getMessage());
-                }
-
-                MultipartFile multipartFile = new CommonsMultipartFile(fileItem);
-
-                //when
-                userRepository.save(baseUser);
-                BoardResponseDto boardResponseDto1 = boardController.createBoard(
-                        nullMultipartFile,
-                        1,
-                        "내용",
-                        baseUserDetails
-                );
-                BoardResponseDto boardResponseDto2 = boardController.createBoard(
-                        multipartFile,
-                        1,
-                        "내용",
-                        baseUserDetails
-                );
-
-                //then
-                assertThat(boardResponseDto1.getContent()).isEqualTo("내용");
-                assertThat(boardResponseDto1.getLayout()).isEqualTo(1);
-
-                assertThat(boardResponseDto2.getImageLink() != null).isEqualTo(true);
-                assertThat(boardResponseDto2.getContent()).isEqualTo("내용");
-                assertThat(boardResponseDto2.getLayout()).isEqualTo(1);
-
-                boardController.removeBoard(boardResponseDto2.getBoard_id(), baseUserDetails);
-            }
+//
+//            @Test
+//            @Transactional
+//            @DisplayName("게시글 생성 & 조회")
+//            void CreateAndGetBoard() throws IOException {
+//                //given
+//                File file = new File("src\\test\\java\\com\\homework\\hanghae99homework02\\image\\" +
+//                        "test.jpg");
+//                FileItem fileItem = new DiskFileItem("test.jpg",
+//                        Files.probeContentType(file.toPath()), false, file.getName(), (int) file.length(), file.getParentFile());
+//
+//                try {
+//                     IOUtils.copy(new FileInputStream(file), fileItem.getOutputStream());
+//                } catch (IOException ex) {
+//                    System.err.println("에러다 에러 ! ex.getMessage() = " + ex.getMessage());
+//                }
+//
+//                MultipartFile multipartFile = new CommonsMultipartFile(fileItem);
+//
+//                //when
+//                userRepository.save(baseUser);
+//                BoardResponseDto boardResponseDto1 = boardController.createBoard(
+//                        nullMultipartFile,
+//                        1,
+//                        "내용",
+//                        baseUserDetails
+//                );
+//                BoardResponseDto boardResponseDto2 = boardController.createBoard(
+//                        multipartFile,
+//                        1,
+//                        "내용",
+//                        baseUserDetails
+//                );
+//
+//                //then
+//                assertThat(boardResponseDto1.getContent()).isEqualTo("내용");
+//                assertThat(boardResponseDto1.getLayout()).isEqualTo(1);
+//
+//                assertThat(boardResponseDto2.getImageLink() != null).isEqualTo(true);
+//                assertThat(boardResponseDto2.getContent()).isEqualTo("내용");
+//                assertThat(boardResponseDto2.getLayout()).isEqualTo(1);
+//
+//                boardController.removeBoard(boardResponseDto2.getBoard_id(), baseUserDetails);
+//            }
 
             @Test
             @Transactional
