@@ -55,7 +55,6 @@ class BoardControllerTest {
                     .roles(Collections.singletonList("ROLE_USER"))
                     .build();
 
-
             baseUserDetails = new UserDetailsImpl(baseUser);
 
             nullMultipartFile = new MultipartFile() {
