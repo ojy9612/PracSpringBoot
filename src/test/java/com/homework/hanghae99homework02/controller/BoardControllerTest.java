@@ -100,7 +100,6 @@ class BoardControllerTest {
                     System.err.println("에러다 에러 ! ex.getMessage() = " + ex.getMessage());
                 }
 
-
                 MultipartFile multipartFile = new CommonsMultipartFile(fileItem);
 
                 //when
