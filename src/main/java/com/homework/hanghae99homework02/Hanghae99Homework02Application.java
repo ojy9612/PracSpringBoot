@@ -11,9 +11,6 @@ import java.util.TimeZone;
 
 @EnableJpaAuditing //?? 어떻게 바꿔야하지? 에러가능성 TODO
 @SpringBootApplication
-@PropertySources({
-        @PropertySource("classpath:application-dev.properties")
-})
 public class Hanghae99Homework02Application {
 
     public static void main(String[] args) {
