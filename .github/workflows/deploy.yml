@@ -47,7 +47,6 @@ jobs:
           character set server: 'utf8'
           collation server: 'localhost' 
           mysql database: 'homework02' 
-          mysql root password: ${{ secrets.MYSQL_PASSWORD }}
           mysql user: ${{ secrets.MYSQL_USER }}
           mysql password: ${{ secrets.MYSQL_PASSWORD }}
 
