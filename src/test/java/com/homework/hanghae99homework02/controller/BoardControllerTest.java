@@ -56,6 +56,7 @@ class BoardControllerTest {
                     .build();
 
 
+
             baseUserDetails = new UserDetailsImpl(baseUser);
 
             nullMultipartFile = new MultipartFile() {
