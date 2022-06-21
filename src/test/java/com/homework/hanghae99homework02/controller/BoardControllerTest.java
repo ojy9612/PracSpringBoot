@@ -1,6 +1,5 @@
 package com.homework.hanghae99homework02.controller;
 
-import com.homework.hanghae99homework02.dto.BoardDto;
 import com.homework.hanghae99homework02.dto.BoardResponseDto;
 import com.homework.hanghae99homework02.exception.eset.WrongIdException;
 import com.homework.hanghae99homework02.model.User;
@@ -19,8 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.transaction.Transactional;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
@@ -257,7 +258,7 @@ class BoardControllerTest {
             @Test
             @Transactional
             @DisplayName("다른사람 게시글 삭제")
-            void 다른사람게시글삭제() {
+            void AnotherIdDeleteBoard() {
                 //given
                 User user2 = User.builder()
                         .email("email2@test.com")
