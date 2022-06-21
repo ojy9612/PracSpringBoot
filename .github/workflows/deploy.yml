@@ -32,24 +32,21 @@ jobs:
           java-version: 1.11
           
           
-      - name: Setup MySQL
-#         uses: gtadam/mysql-deploy-action@v1
-#         with:
-#           DATABASE_HOST: 'localhost'
-#           DATABASE_PORT: '3306'
-#           DATABASE_NAME: 'homework02'
-#           DATABASE_USERNAME: ${{ secrets.MYSQL_USER }}
-#           DATABASE_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-#           DATABASE_SCRIPT: './script.sql'
-        
-        uses: mirromutth/mysql-action@v1.1
-        with:
-          character set server: 'utf8'
-          collation server: 'localhost' 
-          mysql database: 'homework02' 
-          mysql user: ${{ secrets.MYSQL_USER }}
-          mysql password: ${{ secrets.MYSQL_PASSWORD }}
+    ## create application-dev.properties
+      - name: make application-dev.properties
+        if: true # branch가 develop일 때
+        run: |
+          # spring의 resources 경로로 이동
+          cd ./src/main/resources 
 
+          # application-dev.properties 파일 생성
+          touch ./application-dev.properties 
+
+          # GitHub-Actions에서 설정한 값을 application-dev.properties 파일에 쓰기
+          echo "${{ secrets.PROPERTIES_DEV }}" > ./application-dev.properties 
+        shell: bash
+      
+      
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
         shell: bash
