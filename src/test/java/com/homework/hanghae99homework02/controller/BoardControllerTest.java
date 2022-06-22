@@ -57,6 +57,8 @@ class BoardControllerTest {
 
             baseUserDetails = new UserDetailsImpl(baseUser);
 
+
+
             nullMultipartFile = new MultipartFile() {
                 @Override
                 public String getName() {return null;}
