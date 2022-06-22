@@ -1,4 +1,4 @@
-REPOSITORY=/home/ec2-user/app
+REPOSITORY=/home/ubuntu/hanghae99Homework02
 cd $REPOSITORY
 
 APP_NAME=curriculum #1
@@ -17,4 +17,4 @@ else
 fi
 
 echo "> $JAR_PATH 배포" #3
-nohup java -jar /home/ec2-user/app/build/libs/hanghae99Homework02-0.0.1-SNAPSHOT.jar &
+nohup java -jar /home/ubuntu/hanghae99Homework02/build/libs/hanghae99Homework02-0.0.1-SNAPSHOT.jar &
